@@ -84,6 +84,7 @@ from Track t, Album al, MediaType mt, Genre g
 where t.AlbumId = al.AlbumId and t.MediaTypeId = mt.MediaTypeId and t.GenreId = g.GenreId
 
 -- 17. invoices_line_item_count.sql: Provide a query that shows all Invoices but includes the # of invoice line items.
+select i.*, count(*) 'Number Tracks'
 from Invoice i, InvoiceLine il
 where i.Invoiceid = il.InvoiceId
 group by i.InvoiceId
@@ -120,6 +121,7 @@ from Invoice i
 group by i.BillingCountry
 
 -- 23. top_country.sql: Which country's customers spent the most?
+select i.BillingCountry 'Country', sum(i.Total) 'Purchase Amount'
 from Invoice i
 group by i.BillingCountry
 order by sum(i.Total) desc limit 1
